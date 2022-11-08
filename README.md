@@ -4,14 +4,15 @@
 
 A Helm chart for Geoserver
 
-This is a fork to keep track of what I am do to get this running on a fedora 36 box, based on the repo at https://github.com/camptocamp/helm-geoserver-cloud, and the principle of using the most unfamiliar path possible to see how far I could get and see what I could learn.
+This is a fork to keep track of what I am doing to get this running on a fedora 36 box, based on the repo at https://github.com/camptocamp/helm-geoserver-cloud, and the principle of using the most unfamiliar path possible to see how far I could get and see what I could learn.
 
 Dependencies: Using (dnf)[https://docs.fedoraproject.org/en-US/quick-docs/dnf-system-upgrade/], I brought a workstation up to fedora 36 and followed the docker (install instructions)[https://docs.docker.com/engine/install/fedora/]. k3d install and kubectl instuctions below worked fine and I can recommend them
 
 I had to take a bit of time setting up and learning  about helm: (quickststart)[https://helm.sh/docs/intro/quickstart/]
 
 
-My install is not yet working, please do not follow these directions without preparing yourself for a bit of fustration or delay.
+## NOT YET WORKING DO NOT FOLLOW ##
+The geoserver is not yet working, please do not follow these directions without preparing yourself for a bit of fustration or delay.
 The kubernetes cluster is up and the external dependecies are running correctly, but I have a CrashLoopBackOff error for all the geoserver-cloud specific services:
 
     geoserver-postgresql-0                             1/1     Running            0                 12h
