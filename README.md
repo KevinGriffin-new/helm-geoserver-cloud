@@ -4,6 +4,39 @@
 
 A Helm chart for Geoserver
 
+This is a fork to keep track of what I am do to get this running on a fedora 36 box, based on the repo at https://github.com/camptocamp/helm-geoserver-cloud, and the principle of using the most unfamiliar path possible to see how far I could get and see what I could learn.
+
+Dependencies: Using (dnf)[https://docs.fedoraproject.org/en-US/quick-docs/dnf-system-upgrade/], I brought a workstation up to fedora 36 and followed the docker (install instructions)[https://docs.docker.com/engine/install/fedora/]. k3d install and kubectl instuctions below worked fine and I can recommend them
+
+I had to take a bit of time setting up and learning  about helm: (quickststart)[https://helm.sh/docs/intro/quickstart/]
+
+
+My install is not yet working, please do not follow these directions without preparing yourself for a bit of fustration or delay.
+The kubernetes cluster is up and the external dependecies are running correctly, but I have a CrashLoopBackOff error for all the geoserver-cloud specific services:
+
+    geoserver-postgresql-0                             1/1     Running            0                 12h
+    geoserver-geoservercloud-gateway-f7bb958f8-jn8dc   1/1     Running            0                 12h
+    geoserver-rabbitmq-0                               1/1     Running            0                 12h
+    geoserver-geoservercloud-wms-6bf49d779-8b2v7       0/1     CrashLoopBackOff   144 (4m43s ago)   12h
+    geoserver-geoservercloud-gwc-5c756b99cf-ltlj6      0/1     CrashLoopBackOff   144 (4m39s ago)   12h
+    geoserver-geoservercloud-rest-67b84569f4-pzzkr     0/1     CrashLoopBackOff   145 (4m2s ago)    12h
+    geoserver-geoservercloud-wfs-9ff77756c-nc797       0/1     CrashLoopBackOff   145 (2m28s ago)   12h
+    geoserver-geoservercloud-webui-c45b795fb-4r9bj     0/1     CrashLoopBackOff   146 (101s ago)    12h
+    geoserver-geoservercloud-wcs-7c4d95d9fc-dk98b      0/1     CrashLoopBackOff   146 (78s ago)     12h
+
+So of course the web ui returns a 404:
+
+    wget http://localhost:8085/geoserver-cloud/web/ 
+
+    [root@fedora kevin]# wget http://localhost:8085/geoserver-cloud/web/
+    --2022-11-08 07:00:05--  http://localhost:8085/geoserver-cloud/web/
+    Resolving localhost (localhost)... ::1, 127.0.0.1
+    Connecting to localhost (localhost)|::1|:8085... connected.
+    HTTP request sent, awaiting response... 404 Not Found
+    2022-11-08 07:00:05 ERROR 404: Not Found.
+
+
+
 ## include this chart as dependency of your own chart:
 
 just include the following section in your `Chart.yaml`:
